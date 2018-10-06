@@ -34,7 +34,7 @@ class Bot:
             elif DirectionMaison.x > 0:
                 return create_move_action(Point(-1, 0))
             else:
-                return create_empty_action()
+                trouverObjet()
 
         def MarcheRoche():
             DirectionRoche = self.PlayerInfo.Position - (self.PlayerInfo.HouseLocation - Point(-3, -5))
@@ -59,53 +59,32 @@ class Bot:
             elif direction.x > 0:
                 return create_move_action(Point(-1, 0))
 
-        def trouverObjet(type):
+        def trouverObjet( type):
+            if self.PlayerInfo.CarriedResources == self.PlayerInfo.CarryingCapacity:
+                return RetourMaison()
+            else:
+                position = self.PlayerInfo.Position
+                for y in range(position.y - 10, position.y + 10):
+                    for x in range(position.x - 10, position.x + 10):
+                        if gameMap.getTileAt(Point(x, y)) == TileContent(type):
 
-            for x in range(0, 21):
-                for y in range(0, 21):
-                    if gameMap.getTileAt(Point(0, 0)) == type:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(-1, 0))
+                            if position.x-x == 1 and position.y-y == 0 :
+                                return create_collect_action(Point(-1, 0))
 
-                    elif gameMap.getTileAt(Point(0, 0)) == 0:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(-1, 0))
+                            elif position.x-x == -1 and position.y-y == 0:
+                                return create_collect_action(Point(1, 0))
 
-                    elif gameMap.getTileAt(Point(0, 0)) == 1:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(-1, 0))
+                            if position.y-y == 1 and position.x-x == 0:
+                                return create_collect_action(Point(0, -1))
 
-                    elif gameMap.getTileAt(Point(0, 0)) == 2:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(-1, 0))
+                            elif position.y-y == -1 and position.x-x == 0:
+                                return create_collect_action(Point(0, 1))
 
-                    elif gameMap.getTileAt(Point(0, 0)) == 3:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(-1, 0))
-
-
-                    elif gameMap.getTileAt(Point(0, 0)) == 4:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(-1, 0))
-
-                    if gameMap.getTileAt(Point(0, 0)) == 5:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(1, 0))
-
-                    if gameMap.getTileAt(Point(0, 0)) == 6:
-                        position = Point(x, y)
-                        direction = position - Point(10, 10)
-                        return create_move_action(Point(1, 0))
+                            direction = position - Point(x, y)
+                            return faireMouvement(direction)
 
         def bouger():
-            direction = self.PlayerInfo.Position - (self.PlayerInfo.HouseLocation - Point(-5,3))
+            direction = self.PlayerInfo.Position - (self.PlayerInfo.HouseLocation - Point(-5, 3))
 
             if direction.x < 0:
                 return create_move_action(Point(1, 0))
@@ -117,11 +96,12 @@ class Bot:
                 return create_move_action(Point(0, -1))
 
             else:
-                self.count += 1
+
                 return create_collect_action(Point(0, -1))
 
+        return trouverObjet(4)
 
-        return RetourMaison()
+        #return RetourMaison()
 
     def after_turn(self):
         """
