@@ -121,7 +121,7 @@ class Bot:
                 return create_collect_action(Point(0, -1))
 
 
-        return bouger()
+        return RetourMaison()
 
     def after_turn(self):
         """
