@@ -24,7 +24,7 @@ class Bot:
         if (gameMap.getTileAt(self.Position) != 2):
             move = create_move_action(Point(1, 0))
 
-        return move
+        return create_move_action(Point(1, 0))
 
     def after_turn(self):
         """
