@@ -68,7 +68,7 @@ class Bot:
             petitPoint=Point(6,6)
             for x in range(len(roche)):
                 distance = roche[x].Distance(roche[x], position)
-                if (distance <= petitdistance):
+                if (distance < petitdistance):
                     petitPoint = roche[x]
 
             return petitPoint
@@ -165,7 +165,7 @@ class Bot:
 
                 return create_collect_action(Point(0, -1))
 
-        return create_move_action(Point(-1,0))
+        return trouverObjet(4)
 
         # return RetourMaison()
 
