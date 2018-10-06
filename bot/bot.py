@@ -64,6 +64,15 @@ class Bot:
                 return RetourMaison()
             else:
                 position = self.PlayerInfo.Position
+                if gameMap.getTileAt(Point(position.x+1,position.y)) == TileContent(1):
+                    return create_attack_action(Point(1,0))
+                if gameMap.getTileAt(Point(position.x-1,position.y)) == TileContent(1):
+                    return create_attack_action(Point(-1,0))
+                if gameMap.getTileAt(Point(position.x,position.y+1)) == TileContent(1):
+                    return create_attack_action(Point(0,1))
+                if gameMap.getTileAt(Point(position.x,position.y-1)) == TileContent(1):
+                    return create_attack_action(Point(0,-1))
+
                 for y in range(position.y - 10, position.y + 10):
                     for x in range(position.x - 10, position.x + 10):
                         if gameMap.getTileAt(Point(x, y)) == TileContent(type):
@@ -99,7 +108,7 @@ class Bot:
 
                 return create_collect_action(Point(0, -1))
 
-        return RetourMaison()
+        return trouverObjet(4)
 
         #return RetourMaison()
 
