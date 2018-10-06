@@ -60,18 +60,21 @@ class Bot:
                 return create_move_action(Point(-1, 0))
 
         def trouverObjet( type):
+            position = self.PlayerInfo.Position
+            if gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(1) or gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(2):
+                return create_attack_action(Point(1, 0))
+            if gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(1) or gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(2):
+                return create_attack_action(Point(-1, 0))
+            if gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(1) or gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(2):
+                return create_attack_action(Point(0, 1))
+            if gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(1) or gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(1):
+                return create_attack_action(Point(0, -1))
             if self.PlayerInfo.CarriedResources == self.PlayerInfo.CarryingCapacity:
                 return RetourMaison()
             else:
                 position = self.PlayerInfo.Position
-                if gameMap.getTileAt(Point(position.x+1,position.y)) == TileContent(1):
-                    return create_attack_action(Point(1,0))
-                if gameMap.getTileAt(Point(position.x-1,position.y)) == TileContent(1):
-                    return create_attack_action(Point(-1,0))
-                if gameMap.getTileAt(Point(position.x,position.y+1)) == TileContent(1):
-                    return create_attack_action(Point(0,1))
-                if gameMap.getTileAt(Point(position.x,position.y-1)) == TileContent(1):
-                    return create_attack_action(Point(0,-1))
+
+
 
                 for y in range(position.y - 10, position.y + 10):
                     for x in range(position.x - 10, position.x + 10):
