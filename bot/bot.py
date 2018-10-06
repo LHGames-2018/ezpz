@@ -22,7 +22,7 @@ class Bot:
         # Write your bot here. Use functions from aiHelper to instantiate your actions.
 
         if (gameMap.getTileAt(self.Position) != 2):
-            move = create_move_action(Point(1, 0))
+            move = create_move_action(Point(-1, 0))
 
         return move
 
