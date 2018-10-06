@@ -23,18 +23,47 @@ class Bot:
 
         # Write your bot here. Use functions from aiHelper to instantiate your actions.
         def RetourMaison():
+            position=self.PlayerInfo.Position
             DirectionMaison = self.PlayerInfo.Position - self.PlayerInfo.HouseLocation
+            roche=rocheProche()
+
 
             if DirectionMaison.y < 0:
+                if(position.y-roche.y==1):
+                    return create_move_action(1,0)
                 return create_move_action(Point(0, 1))
             elif DirectionMaison.y > 0:
+                if (position.y - roche.y == -1):
+                    return create_move_action(1, 0)
                 return create_move_action(Point(0, -1))
+
             elif DirectionMaison.x < 0:
+                if (position.x - roche.x == -1):
+                    return create_move_action(0, -1)
                 return create_move_action(Point(1, 0))
+
+
             elif DirectionMaison.x > 0:
+
                 return create_move_action(Point(-1, 0))
             else:
                 trouverObjet()
+
+
+        def rocheProche():
+            position = self.PlayerInfo.Position
+            roche = []
+            for y in range(position.y - 10, position.y + 10):
+                for x in range(position.x - 10, position.x + 10):
+                    if gameMap.getTileAt(Point(x, y)) == TileContent(4):
+                        roche.append(Point(x, y))
+            petitdistance = 10000
+            for x in range(len(roche)):
+                distance = roche[x].Distance(roche[x], position)
+                if (distance <= petitdistance):
+                    petitPoint = roche[x]
+
+            return petitPoint
 
         def MarcheRoche():
             DirectionRoche = self.PlayerInfo.Position - (self.PlayerInfo.HouseLocation - Point(-3, -5))
