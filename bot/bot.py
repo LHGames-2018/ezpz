@@ -61,14 +61,26 @@ class Bot:
 
         def trouverObjet( type):
             position = self.PlayerInfo.Position
-            if gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(1) or gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(2):
+            if gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(4):
+                return create_collect_action(Point(1, 0))
+            if gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(4):
+                return create_collect_action(Point(-1, 0))
+            if gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(4):
+                return create_collect_action(Point(0, 1))
+            if gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(4):
+                return create_collect_action(Point(0, -1))
+
+
+            if gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(1) or gameMap.getTileAt(Point(position.x + 1, position.y)) == TileContent(6):
                 return create_attack_action(Point(1, 0))
-            if gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(1) or gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(2):
+            if gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(1) or gameMap.getTileAt(Point(position.x - 1, position.y)) == TileContent(6):
                 return create_attack_action(Point(-1, 0))
-            if gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(1) or gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(2):
+            if gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(1) or gameMap.getTileAt(Point(position.x, position.y + 1)) == TileContent(6):
                 return create_attack_action(Point(0, 1))
-            if gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(1) or gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(1):
+            if gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(1) or gameMap.getTileAt(Point(position.x, position.y - 1)) == TileContent(6):
                 return create_attack_action(Point(0, -1))
+
+
             if self.PlayerInfo.CarriedResources == self.PlayerInfo.CarryingCapacity:
                 return RetourMaison()
             else:
