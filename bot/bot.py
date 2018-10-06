@@ -21,9 +21,9 @@ class Bot:
 
         # Write your bot here. Use functions from aiHelper to instantiate your actions.
 
-        create_move_action(-1,0)
+        move=create_move_action(-1,0)
 
-        return create_move_action(Point(1, 0))
+        return move
 
     def after_turn(self):
         """
