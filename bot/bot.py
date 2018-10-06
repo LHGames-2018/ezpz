@@ -22,6 +22,7 @@ class Bot:
         """
 
         # Write your bot here. Use functions from aiHelper to instantiate your actions.
+
         def RetourMaison():
             position=self.PlayerInfo.Position
             DirectionMaison = self.PlayerInfo.Position - self.PlayerInfo.HouseLocation
@@ -29,23 +30,28 @@ class Bot:
 
 
             if DirectionMaison.y < 0:
-                if(position.y-roche.y==1):
-                    return create_move_action(Point(1,0))
+               # if(position.y-roche.y==1):
+               #     return create_move_action(Point(-1,0))
+               # elif (position.x-roche.x==1 and position.y-roche.y==-1):
+              #      return create_move_action(Point(-1,0))
                 return create_move_action(Point(0, 1))
+
             elif DirectionMaison.y > 0:
-                if (position.y - roche.y == -1):
-                    return create_move_action(Point(1, 0))
+             #   if (position.y - roche.y == -1):
+              #      return create_move_action(Point(1, 0))
+             #   elif (position.x-roche.x==-1 and position.y-roche.y==1):
+             #       return create_move_action(Point(1,0))
                 return create_move_action(Point(0, -1))
 
             elif DirectionMaison.x < 0:
-                if (position.x - roche.x == -1):
-                    return create_move_action(Point(0, -1))
+             #  if (position.x - roche.x == -1):
+              #      return create_move_action(Point(0, -1))
                 return create_move_action(Point(1, 0))
 
 
             elif DirectionMaison.x > 0:
-                if (position.x - roche.x == 1):
-                    return create_move_action(Point(0, -1))
+              #  if (position.x - roche.x == 1):
+               #     return create_move_action(Point(0, -1))
                 return create_move_action(Point(-1, 0))
             else:
                 trouverObjet()
@@ -59,6 +65,7 @@ class Bot:
                     if gameMap.getTileAt(Point(x, y)) == TileContent(4):
                         roche.append(Point(x, y))
             petitdistance = 10000
+            petitPoint=Point(6,6)
             for x in range(len(roche)):
                 distance = roche[x].Distance(roche[x], position)
                 if (distance <= petitdistance):
