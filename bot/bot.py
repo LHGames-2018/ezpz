@@ -99,7 +99,7 @@ class Bot:
 
                 return create_collect_action(Point(0, -1))
 
-        return trouverObjet(4)
+        return RetourMaison()
 
         #return RetourMaison()
 
