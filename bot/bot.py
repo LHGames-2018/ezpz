@@ -30,15 +30,15 @@ class Bot:
 
 
             if DirectionMaison.y < 0:
-               # if(position.y-roche.y==1):
-               #     return create_move_action(Point(-1,0))
+                if(position.y-roche.y==1):
+                    return create_move_action(Point(-1,0))
                # elif (position.x-roche.x==1 and position.y-roche.y==-1):
               #      return create_move_action(Point(-1,0))
                 return create_move_action(Point(0, 1))
 
             elif DirectionMaison.y > 0:
-             #   if (position.y - roche.y == -1):
-              #      return create_move_action(Point(1, 0))
+                if (position.y - roche.y == -1):
+                    return create_move_action(Point(1, 0))
              #   elif (position.x-roche.x==-1 and position.y-roche.y==1):
              #       return create_move_action(Point(1,0))
                 return create_move_action(Point(0, -1))
