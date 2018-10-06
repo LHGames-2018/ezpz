@@ -30,21 +30,22 @@ class Bot:
 
             if DirectionMaison.y < 0:
                 if(position.y-roche.y==1):
-                    return create_move_action(1,0)
+                    return create_move_action(Point(1,0))
                 return create_move_action(Point(0, 1))
             elif DirectionMaison.y > 0:
                 if (position.y - roche.y == -1):
-                    return create_move_action(1, 0)
+                    return create_move_action(Point(1, 0))
                 return create_move_action(Point(0, -1))
 
             elif DirectionMaison.x < 0:
                 if (position.x - roche.x == -1):
-                    return create_move_action(0, -1)
+                    return create_move_action(Point(0, -1))
                 return create_move_action(Point(1, 0))
 
 
             elif DirectionMaison.x > 0:
-
+                if (position.x - roche.x == 1):
+                    return create_move_action(Point(0, -1))
                 return create_move_action(Point(-1, 0))
             else:
                 trouverObjet()
