@@ -106,17 +106,16 @@ class Bot:
 
         def bouger():
             direction = self.PlayerInfo.Position - (self.PlayerInfo.HouseLocation - Point(-5,3))
-            if self.count > 3:
-                RetourMaison()
 
-            if direction.y < 0:
-                return create_move_action(Point(0, 1))
-            elif direction.y > 0:
-                return create_move_action(Point(0, -1))
-            elif direction.x < 0:
+            if direction.x < 0:
                 return create_move_action(Point(1, 0))
             elif direction.x > 0:
                 return create_move_action(Point(-1, 0))
+            elif direction.y < 0:
+                return create_move_action(Point(0, 1))
+            elif direction.y > 0:
+                return create_move_action(Point(0, -1))
+
             else:
                 self.count += 1
                 return create_collect_action(Point(0, -1))
